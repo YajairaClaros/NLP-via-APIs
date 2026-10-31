@@ -1,0 +1,5 @@
+{
+  "id": "sample-01",
+  "context": "BERT (Bidirectional Encoder Representations from Transformers) was introduced by researchers at Google in 2018. Unlike left-to-right language models, BERT is pre-trained to use context from both directions at every layer. Two model sizes were released: BERT-base, with 12 layers, a hidden size of 768 and 12 attention heads, and BERT-large, with 24 layers, a hidden size of 1024 and 16 attention heads. Pre-training used the BooksCorpus and English Wikipedia and combined two objectives: masked language modeling and next sentence prediction.",
+  "question": "How many attention heads does BERT-large have?"
+}

@@ -1,0 +1,438 @@
+{
+  "version": "1.0",
+  "description": "Team-written out-of-domain QA set (not from SQuAD), in the style of the hidden test: ~25% unanswerable, several adversarial unanswerables that look answerable. Edit this file and run `python -m eval.build_sets` to regenerate eval/shadow_set.json.",
+  "items": [
+    {
+      "id": "shadow-01",
+      "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.",
+      "question": "Which volcano buried Joya de Cerén?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Loma Caldera",
+          "start": 144
+        },
+        {
+          "text": "the nearby Loma Caldera volcano",
+          "start": 133
+        },
+        {
+          "text": "Loma Caldera volcano",
+          "start": 144
+        }
+      ]
+    },
+    {
+      "id": "shadow-02",
+      "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.",
+      "question": "When was Joya de Cerén discovered?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "1976",
+          "start": 384
+        },
+        {
+          "text": "in 1976",
+          "start": 381
+        }
+      ]
+    },
+    {
+      "id": "shadow-03",
+      "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.",
+      "question": "Who directed the systematic excavations at Joya de Cerén?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Payson Sheets",
+          "start": 547
+        },
+        {
+          "text": "the archaeologist Payson Sheets",
+          "start": 529
+        }
+      ]
+    },
+    {
+      "id": "shadow-04",
+      "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.",
+      "question": "What crops were found in the cultivated fields?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "maize and manioc",
+          "start": 339
+        }
+      ]
+    },
+    {
+      "id": "shadow-05",
+      "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.",
+      "question": "When did the Loma Caldera volcano erupt for the last time?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-06",
+      "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.",
+      "question": "What is the indigenous name of the Santa Ana Volcano?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Ilamatepec",
+          "start": 57
+        }
+      ]
+    },
+    {
+      "id": "shadow-07",
+      "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.",
+      "question": "How high is the Santa Ana Volcano?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "about 2,381 meters",
+          "start": 135
+        },
+        {
+          "text": "2,381 meters",
+          "start": 141
+        }
+      ]
+    },
+    {
+      "id": "shadow-08",
+      "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.",
+      "question": "When did the most recent eruption of the Santa Ana Volcano take place?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "1 October 2005",
+          "start": 415
+        },
+        {
+          "text": "on 1 October 2005",
+          "start": 412
+        }
+      ]
+    },
+    {
+      "id": "shadow-09",
+      "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.",
+      "question": "Which other volcanoes belong to Los Volcanes National Park?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "the Izalco and Cerro Verde volcanoes",
+          "start": 601
+        },
+        {
+          "text": "Izalco and Cerro Verde",
+          "start": 605
+        }
+      ]
+    },
+    {
+      "id": "shadow-10",
+      "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.",
+      "question": "How many residents were injured during the 2005 eruption?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-11",
+      "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.",
+      "question": "Which status code is returned when a new resource has been created?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "201 Created",
+          "start": 138
+        },
+        {
+          "text": "201",
+          "start": 138
+        }
+      ]
+    },
+    {
+      "id": "shadow-12",
+      "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.",
+      "question": "Which header should a 401 response include?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "WWW-Authenticate",
+          "start": 433
+        },
+        {
+          "text": "a WWW-Authenticate header",
+          "start": 431
+        },
+        {
+          "text": "WWW-Authenticate header",
+          "start": 433
+        }
+      ]
+    },
+    {
+      "id": "shadow-13",
+      "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.",
+      "question": "What does 503 Service Unavailable mean?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "the server is temporarily unable to handle the request",
+          "start": 836
+        }
+      ]
+    },
+    {
+      "id": "shadow-14",
+      "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.",
+      "question": "Which status code means that the client has sent too many requests?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-15",
+      "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.",
+      "question": "Who introduced Adam?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Diederik Kingma and Jimmy Ba",
+          "start": 114
+        }
+      ]
+    },
+    {
+      "id": "shadow-16",
+      "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.",
+      "question": "What does the name Adam stand for?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "adaptive moment estimation",
+          "start": 177
+        }
+      ]
+    },
+    {
+      "id": "shadow-17",
+      "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.",
+      "question": "What decay rate is recommended for the second moment?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "0.999",
+          "start": 578
+        }
+      ]
+    },
+    {
+      "id": "shadow-18",
+      "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.",
+      "question": "Why does Adam apply a bias correction?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "they are biased towards zero during the first steps",
+          "start": 390
+        },
+        {
+          "text": "both averages are initialized at zero",
+          "start": 351
+        }
+      ]
+    },
+    {
+      "id": "shadow-19",
+      "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.",
+      "question": "What learning rate does AdamW recommend for fine-tuning BERT?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-20",
+      "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.",
+      "question": "In what year was Docker released as open-source software?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "2013",
+          "start": 108
+        },
+        {
+          "text": "in 2013",
+          "start": 105
+        }
+      ]
+    },
+    {
+      "id": "shadow-21",
+      "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.",
+      "question": "What do all containers on a host share?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "the host's kernel",
+          "start": 362
+        },
+        {
+          "text": "host's kernel",
+          "start": 366
+        }
+      ]
+    },
+    {
+      "id": "shadow-22",
+      "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.",
+      "question": "What is the text file used to build Docker images called?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Dockerfile",
+          "start": 497
+        },
+        {
+          "text": "a Dockerfile",
+          "start": 495
+        }
+      ]
+    },
+    {
+      "id": "shadow-23",
+      "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.",
+      "question": "How much memory does a typical Docker container use?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-24",
+      "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.",
+      "question": "Who is the current CEO of Docker, Inc.?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-25",
+      "context": "Dropout is a regularization technique for neural networks proposed by Nitish Srivastava, Geoffrey Hinton and colleagues, and published in the Journal of Machine Learning Research in 2014. During training, each unit is temporarily removed from the network with a fixed probability, together with its incoming and outgoing connections. This prevents units from co-adapting too much and forces the network to learn more robust features. The authors found that retaining hidden units with a probability of 0.5 works well for a wide range of networks, while input units should be retained with a probability closer to 1. At test time no units are dropped; instead, the outgoing weights of each unit are multiplied by the probability with which it was retained during training.",
+      "question": "In which journal was dropout published?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "the Journal of Machine Learning Research",
+          "start": 138
+        },
+        {
+          "text": "Journal of Machine Learning Research",
+          "start": 142
+        }
+      ]
+    },
+    {
+      "id": "shadow-26",
+      "context": "Dropout is a regularization technique for neural networks proposed by Nitish Srivastava, Geoffrey Hinton and colleagues, and published in the Journal of Machine Learning Research in 2014. During training, each unit is temporarily removed from the network with a fixed probability, together with its incoming and outgoing connections. This prevents units from co-adapting too much and forces the network to learn more robust features. The authors found that retaining hidden units with a probability of 0.5 works well for a wide range of networks, while input units should be retained with a probability closer to 1. At test time no units are dropped; instead, the outgoing weights of each unit are multiplied by the probability with which it was retained during training.",
+      "question": "With what probability should hidden units be retained?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "0.5",
+          "start": 502
+        },
+        {
+          "text": "a probability of 0.5",
+          "start": 485
+        }
+      ]
+    },
+    {
+      "id": "shadow-27",
+      "context": "Dropout is a regularization technique for neural networks proposed by Nitish Srivastava, Geoffrey Hinton and colleagues, and published in the Journal of Machine Learning Research in 2014. During training, each unit is temporarily removed from the network with a fixed probability, together with its incoming and outgoing connections. This prevents units from co-adapting too much and forces the network to learn more robust features. The authors found that retaining hidden units with a probability of 0.5 works well for a wide range of networks, while input units should be retained with a probability closer to 1. At test time no units are dropped; instead, the outgoing weights of each unit are multiplied by the probability with which it was retained during training.",
+      "question": "At test time, what are the outgoing weights multiplied by?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "the probability with which it was retained during training",
+          "start": 712
+        }
+      ]
+    },
+    {
+      "id": "shadow-28",
+      "context": "Dropout is a regularization technique for neural networks proposed by Nitish Srivastava, Geoffrey Hinton and colleagues, and published in the Journal of Machine Learning Research in 2014. During training, each unit is temporarily removed from the network with a fixed probability, together with its incoming and outgoing connections. This prevents units from co-adapting too much and forces the network to learn more robust features. The authors found that retaining hidden units with a probability of 0.5 works well for a wide range of networks, while input units should be retained with a probability closer to 1. At test time no units are dropped; instead, the outgoing weights of each unit are multiplied by the probability with which it was retained during training.",
+      "question": "What dropout probability did the authors use for convolutional layers?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "shadow-29",
+      "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.",
+      "question": "Who led the project that created ImageNet?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "Fei-Fei Li",
+          "start": 427
+        }
+      ]
+    },
+    {
+      "id": "shadow-30",
+      "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.",
+      "question": "How many layers did the deepest ResNets have?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "152",
+          "start": 1894
+        },
+        {
+          "text": "152 layers",
+          "start": 1894
+        }
+      ]
+    },
+    {
+      "id": "shadow-31",
+      "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.",
+      "question": "What top-5 error did the ResNet ensemble achieve in ILSVRC 2015?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "3.57%",
+          "start": 1971
+        }
+      ]
+    },
+    {
+      "id": "shadow-32",
+      "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.",
+      "question": "Into what size patches does the Vision Transformer split an image?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "16x16 pixels",
+          "start": 2664
+        },
+        {
+          "text": "patches of 16x16 pixels",
+          "start": 2653
+        },
+        {
+          "text": "16x16",
+          "start": 2664
+        }
+      ]
+    },
+    {
+      "id": "shadow-33",
+      "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.",
+      "question": "How many GPUs were used to train the Vision Transformer?",
+      "is_impossible": true,
+      "answers": []
+    }
+  ]
+}

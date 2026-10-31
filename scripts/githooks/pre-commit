@@ -1,0 +1,14 @@
+#!/bin/sh
+# Git pre-commit hook: refuse commits that contain the API token, a .env file or model weights.
+# Install once per clone:  git config core.hooksPath scripts/githooks   (see README)
+token="${QA_API_TOKEN:-}"
+if [ -z "$token" ] && [ -f .env ]; then
+  token=$(sed -n 's/^QA_API_TOKEN=//p' .env | tr -d '\r"' | head -n1)
+fi
+if git diff --cached --name-only | grep -E '(^|/)\.env$|\.safetensors$|\.bin$|\.pt$' >/dev/null; then
+  echo "pre-commit: refusing to commit .env or model weights" >&2; exit 1
+fi
+if [ -n "$token" ] && git diff --cached -U0 | grep -F -- "$token" >/dev/null; then
+  echo "pre-commit: the staged changes contain the value of QA_API_TOKEN. Remove it." >&2; exit 1
+fi
+exit 0
