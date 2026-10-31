@@ -1,10 +1,10 @@
 """Fine-tune a pretrained BASE encoder (DistilBERT / BERT / RoBERTa) for SQuAD 2.0.
 
-Rule V.1: we start from a base checkpoint (e.g. `roberta-base`), never from a checkpoint
+Rule V.1: we start from a base checkpoint (e.g. `FacebookAI/roberta-base`), never from a checkpoint
 already fine-tuned on SQuAD. The QA head (start/end classifier) is newly initialised.
 
 Example (GPU):
-    python -m train.train --model roberta-base --epochs 2 --lr 3e-5 --batch_size 16
+    python -m train.train --model FacebookAI/roberta-base --epochs 2 --lr 3e-5 --batch_size 16
 
 Outputs:
     checkpoints/<run>/            intermediate checkpoints (git-ignored, for resuming)
@@ -45,8 +45,8 @@ FORBIDDEN_HINTS = ("squad", "qa", "question")
 
 def parse_args():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--model", default="roberta-base",
-                   help="Base checkpoint: distilbert-base-uncased | bert-base-uncased | roberta-base")
+    p.add_argument("--model", default="FacebookAI/roberta-base",
+                   help="Base checkpoint: FacebookAI/roberta-base | distilbert/distilbert-base-uncased | google-bert/bert-base-uncased")
     p.add_argument("--run_name", default=None, help="Folder name under logs/, models/, checkpoints/")
     p.add_argument("--train_file", default=None, help="Optional local SQuAD-format json/jsonl instead of the Hub dataset")
     p.add_argument("--validation_file", default=None)

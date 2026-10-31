@@ -33,7 +33,7 @@ def get_settings() -> Settings:
     token = os.environ.get("QA_API_TOKEN", "").strip()
     if not token:
         raise RuntimeError("QA_API_TOKEN is not set. Export it (or put it in .env) before starting the service.")
-    model_dir = Path(os.environ.get("QA_MODEL_DIR", "models/qa-model"))
+    model_dir = Path(os.environ.get("QA_MODEL_DIR", "models/roberta-base"))
     if not model_dir.is_absolute():
         model_dir = ROOT / model_dir
     threads = os.environ.get("QA_NUM_THREADS")
