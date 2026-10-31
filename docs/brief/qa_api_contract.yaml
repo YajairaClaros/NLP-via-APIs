@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: Extractive QA Service — API contract
+  version: "1.0"
+  description: |
+    Contract every team's service must implement exactly.
+
+    General rules
+    - Base URL: the team's public HTTPS tunnel URL (ngrok, Cloudflare Quick Tunnel or Tailscale Funnel).
+      Locally the service listens on port 8000.
+    - All request and response bodies are JSON, UTF-8, `Content-Type: application/json`.
+    - Protected endpoints require `Authorization: Bearer <token>`. The token is read
+      from the environment variable `QA_API_TOKEN`. The scheme name `Bearer` and the
+      token are compared exactly (case-sensitive).
+    - Error responses use the `Error` schema.
+    - The evaluation harness applies a 5 s timeout per request.
+    - Extra fields in responses are allowed and ignored. Missing required fields make
+      the response invalid.
+
+servers:
+  - url: http://localhost:8000
+    description: Local development
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Shared token, read by the service from the environment variable QA_API_TOKEN.
+
+  schemas:
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok, loading]
+          description: "`ok` only when the model is loaded and the service can answer /predict."
+
+    Info:
+      type: object
+      required: [team, model, params]
+      properties:
+        team:
+          type: string
+          description: Team name as registered with the instructor (no spaces).
+          examples: ["team-03"]
+        model:
+          type: string
+          description: Hugging Face id of the base checkpoint the team fine-tuned from.
+          examples: ["distilbert-base-uncased"]
+        params:
+          type: integer
+          minimum: 1
+          description: Total number of parameters of the served model.
+          examples: [66362880]
+        max_seq_length:
+          type: integer
+          description: Optional. Maximum tokens per model input window.
+          examples: [384]
+        doc_stride:
+          type: integer
+          description: Optional. Token overlap between windows for long contexts.
+          examples: [128]
+
+    PredictRequest:
+      type: object
+      required: [id, context, question]
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: Item id. Must be echoed back unchanged.
+          examples: ["q-017"]
+        context:
+          type: string
+          minLength: 1
+          maxLength: 5000
+          description: Paragraph in English, at most 5000 characters. May exceed the model's max_seq_length in tokens.
+        question:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Question in English, at most 500 characters.
+
+    PredictResponse:
+      type: object
+      required: [id, answer, start, score]
+      properties:
+        id:
+          type: string
+          description: Same value as the request id.
+        answer:
+          type: [string, "null"]
+          description: |
+            Answer span copied verbatim from the context, or null for "no answer".
+            Must satisfy context[start : start + len(answer)] == answer.
+        start:
+          type: [integer, "null"]
+          minimum: 0
+          description: Character offset of the answer in the context (0-based). null if and only if answer is null.
+        score:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Model confidence in the returned output (span, or no-answer). Not graded.
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          enum: [unauthorized, bad_request, internal_error]
+        detail:
+          type: string
+          description: Optional human-readable explanation.
+
+  responses:
+    Unauthorized:
+      description: Missing, malformed or invalid bearer token.
+      headers:
+        WWW-Authenticate:
+          description: Should be `Bearer`.
+          schema: {type: string}
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Error"}
+          example: {error: unauthorized}
+    BadRequest:
+      description: Body is not valid JSON or violates PredictRequest. 400 or 422 are both accepted.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Error"}
+          example: {error: bad_request, detail: "field 'question' is required"}
+    InternalError:
+      description: Unhandled failure. Counts as a failed item.
+      content:
+        application/json:
+          schema: {$ref: "#/components/schemas/Error"}
+          example: {error: internal_error}
+
+paths:
+  /health:
+    get:
+      summary: Liveness and readiness check (public)
+      security: []
+      responses:
+        "200":
+          description: Model loaded, ready to serve.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Health"}
+              example: {status: ok}
+        "503":
+          description: Service up, model still loading.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Health"}
+              example: {status: loading}
+
+  /info:
+    get:
+      summary: Team and model metadata (protected)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Metadata.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/Info"}
+              example: {team: team-03, model: distilbert-base-uncased, params: 66362880, max_seq_length: 384, doc_stride: 128}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+
+  /predict:
+    post:
+      summary: Answer one question about one context (protected)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: "#/components/schemas/PredictRequest"}
+            examples:
+              answerable:
+                value:
+                  id: q-017
+                  context: "The Lempa River is the longest river in El Salvador, flowing about 422 km from Guatemala to the Pacific Ocean."
+                  question: "How long is the Lempa River?"
+              unanswerable:
+                value:
+                  id: q-018
+                  context: "The Lempa River is the longest river in El Salvador, flowing about 422 km from Guatemala to the Pacific Ocean."
+                  question: "When was the first dam built on the Lempa River?"
+      responses:
+        "200":
+          description: Prediction.
+          content:
+            application/json:
+              schema: {$ref: "#/components/schemas/PredictResponse"}
+              examples:
+                answerable:
+                  value: {id: q-017, answer: "about 422 km", start: 61, score: 0.91}
+                unanswerable:
+                  value: {id: q-018, answer: null, start: null, score: 0.84}
+        "400": {$ref: "#/components/responses/BadRequest"}
+        "401": {$ref: "#/components/responses/Unauthorized"}
+        "422": {$ref: "#/components/responses/BadRequest"}
+        "500": {$ref: "#/components/responses/InternalError"}

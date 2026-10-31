@@ -1,0 +1,8 @@
+# Serving (laptop, CPU). Install PyTorch first if you need a specific build: https://pytorch.org/get-started/locally/
+torch>=2.3
+transformers==5.22.1
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic>=2.7,<3
+python-dotenv>=1.0
+requests>=2.31

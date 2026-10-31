@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "description": "Public sample set for the Extractive QA as a Service project. Each item contains the fields of a /predict request (id, context, question) plus the reference answers. is_impossible = true means the correct response is answer = null. Each reference answer has its text and its 0-based character offset (start) in the context. Any listed answer is accepted. sample-05 has a context longer than 512 tokens.",
+  "items": [
+    {
+      "id": "sample-01",
+      "context": "BERT (Bidirectional Encoder Representations from Transformers) was introduced by researchers at Google in 2018. Unlike left-to-right language models, BERT is pre-trained to use context from both directions at every layer. Two model sizes were released: BERT-base, with 12 layers, a hidden size of 768 and 12 attention heads, and BERT-large, with 24 layers, a hidden size of 1024 and 16 attention heads. Pre-training used the BooksCorpus and English Wikipedia and combined two objectives: masked language modeling and next sentence prediction.",
+      "question": "How many attention heads does BERT-large have?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "16",
+          "start": 383
+        },
+        {
+          "text": "16 attention heads",
+          "start": 383
+        }
+      ]
+    },
+    {
+      "id": "sample-02",
+      "context": "The Transformer, proposed in the 2017 paper \"Attention Is All You Need\", replaced recurrence with attention. Its core operation, scaled dot-product attention, computes the dot products of a query with all keys and divides each of them by the square root of the key dimension before applying a softmax. The authors trained their base model for 100,000 steps, about 12 hours, on eight NVIDIA P100 GPUs, while the big model was trained for 3.5 days.",
+      "question": "How long was the big Transformer model trained?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "3.5 days",
+          "start": 437
+        }
+      ]
+    },
+    {
+      "id": "sample-03",
+      "context": "SQuAD 2.0 extends the Stanford Question Answering Dataset with questions that cannot be answered from the given paragraph. It combines the existing SQuAD data with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. To do well, a system must not only answer questions when possible, but also determine when no answer is supported by the paragraph and abstain from answering.",
+      "question": "How much were the crowdworkers paid to write the unanswerable questions?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "sample-04",
+      "context": "Low-Rank Adaptation (LoRA) freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times. Because the trainable matrices can be merged with the frozen weights when the model is deployed, LoRA introduces no additional inference latency.",
+      "question": "By how many times does LoRA reduce the GPU memory requirement when fine-tuning BERT-base?",
+      "is_impossible": true,
+      "answers": []
+    },
+    {
+      "id": "sample-05",
+      "context": "Language models do not read raw text. Before any computation happens, a tokenizer splits the input into units drawn from a fixed vocabulary and maps each unit to an integer id. The design of this vocabulary is a trade-off. A vocabulary of whole words is easy to interpret, but it cannot represent words that never appeared in the training data, and it grows very large for languages with rich morphology. A vocabulary of single characters can represent any string, but it produces very long sequences, which is expensive for attention, whose cost grows quadratically with sequence length. Subword tokenization sits between these two extremes: frequent words are kept as single tokens, while rare words are split into smaller pieces that the model has seen many times.\n\nByte Pair Encoding (BPE) is the best known subword method. It was originally a data compression algorithm, and it was adapted to neural machine translation in 2016. Training starts from a vocabulary of individual characters. The algorithm counts every pair of adjacent symbols in the corpus, merges the most frequent pair into a new symbol, and repeats the process until the vocabulary reaches the desired size. At inference time, the learned merges are applied in the same order to segment new text. Because merges are learned from frequency, common words such as \"the\" end up as single tokens, while a rare word may be split into three or four pieces.\n\nWordPiece, the tokenizer used by BERT, follows a similar bottom-up procedure, but chooses merges that most increase the likelihood of the training data instead of simply picking the most frequent pair. BERT marks pieces that continue a word with a double hash prefix, so a word may appear as a first piece followed by one or more pieces such as \"##ing\". The Unigram language model tokenizer works in the opposite direction: it starts from a large set of candidate subwords and repeatedly removes the ones whose loss has the least impact on the likelihood of the corpus.\n\nSentencePiece is a library that implements both BPE and the Unigram model. Its main difference is that it treats the input as a raw stream of characters, including spaces, so it does not need a language-specific pre-tokenizer that splits text into words first. This makes it convenient for languages that do not separate words with spaces.\n\nTokenization has direct consequences for engineering. The maximum input length of a model is measured in tokens, not in words or characters, so the same paragraph can fit within the limit for one tokenizer and exceed it for another. Text in languages that were rare in the tokenizer's training data is usually split into more tokens, which makes it slower and more expensive to process. In extractive question answering, the tokenizer must also keep track of character offsets, so that the start and end tokens predicted by the model can be mapped back to an exact span of the original text.\n\nByte-level BPE, introduced with GPT-2, applies the merge procedure to bytes instead of Unicode characters. Since every string is a sequence of bytes, no input is ever out of vocabulary. GPT-2 uses a byte-level BPE vocabulary of 50,257 tokens.",
+      "question": "How many tokens are in the GPT-2 vocabulary?",
+      "is_impossible": false,
+      "answers": [
+        {
+          "text": "50,257",
+          "start": 3157
+        },
+        {
+          "text": "50,257 tokens",
+          "start": 3157
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+# --- Secrets: the API token must never be committed ---
+.env
+.env.*
+!.env.example
+
+# --- Model weights and checkpoints stay out of git (shared via release / shared folder) ---
+models/*
+!models/.gitkeep
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.onnx
+
+# --- Python / tooling ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+hf_cache/
