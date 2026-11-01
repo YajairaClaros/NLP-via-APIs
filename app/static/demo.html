@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the passage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+:root {
+  --paper: #e8edf1;
+  --sheet: #f8fafb;
+  --ink: #1c2430;
+  --ink-soft: #566577;
+  --rule: #cdd6de;
+  --marker: #f5df4d;
+  --marker-edge: #e2c72a;
+  --pencil: #b8392a;
+  --ok: #2f7a4f;
+  --focus: #2b6cb0;
+  --ui: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --read: "Literata", Georgia, serif;
+  --r-sheet: 6px;
+  --r-control: 4px;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--ui);
+  min-height: 100vh;
+}
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+.shell {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 28px 24px 48px;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-areas:
+    "head head"
+    "side main";
+  gap: 28px 32px;
+}
+.head { grid-area: head; }
+.side { grid-area: side; }
+.main { grid-area: main; min-width: 0; }
+@media (max-width: 880px) {
+  .shell { grid-template-columns: 1fr; grid-template-areas: "head" "main" "side"; padding: 20px 16px 40px; }
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 24px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 16px;
+}
+.title h1 {
+  font: 600 2.4rem/1.05 var(--read);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.title p { margin: 6px 0 0; color: var(--ink-soft); max-width: 60ch; }
+.conn { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.status { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+.dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-soft); }
+.status[data-state="ok"] .dot { background: var(--ok); }
+.status[data-state="loading"] .dot { background: var(--marker-edge); }
+.status[data-state="down"] .dot { background: var(--pencil); }
+.token { display: flex; gap: 6px; }
+.token input {
+  width: 260px; padding: 7px 10px;
+  border: 1px solid var(--rule); border-radius: var(--r-control); background: var(--sheet);
+}
+.model-line { color: var(--ink-soft); font-size: .9rem; text-align: right; min-height: 1.4em; }
+@media (max-width: 880px) { .conn { align-items: stretch; width: 100%; } .token input { flex: 1; width: auto; } .model-line { text-align: left; } }
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn {
+  border: 1px solid var(--ink); background: var(--ink); color: var(--sheet);
+  padding: 7px 14px; border-radius: var(--r-control); cursor: pointer; font-weight: 700;
+}
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--rule); font-weight: 400; }
+
+/* ==========================================================================
+   SAMPLE LIST
+   ========================================================================== */
+.side h2 { font: 600 1.1rem/1.3 var(--read); margin: 0 0 10px; }
+.group-name { color: var(--ink-soft); font-size: .9rem; margin: 18px 0 6px; }
+.group-name:first-of-type { margin-top: 0; }
+.samples { list-style: none; margin: 0; padding: 0; }
+.samples button {
+  width: 100%; text-align: left; background: none; border: 0;
+  border-left: 3px solid transparent;
+  padding: 6px 10px; cursor: pointer; line-height: 1.35;
+}
+.samples button:hover { background: rgba(28, 36, 48, .05); }
+.samples button[aria-current="true"] { border-left-color: var(--ink); background: var(--sheet); }
+.samples .tag { display: block; color: var(--ink-soft); font-size: .8rem; }
+.history { margin-top: 28px; }
+.history ol { margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: .9rem; }
+.history li { margin-bottom: 6px; }
+.history .h-ans { color: var(--ink); }
+.history .h-null { color: var(--pencil); }
+
+/* ==========================================================================
+   QUESTION
+   ========================================================================== */
+.ask { display: flex; gap: 10px; align-items: stretch; }
+.ask input {
+  flex: 1; min-width: 0;
+  font: 400 1.35rem/1.3 var(--read);
+  padding: 12px 14px; border: 1px solid var(--rule); border-bottom: 2px solid var(--ink);
+  border-radius: var(--r-control) var(--r-control) 0 0; background: var(--sheet);
+}
+.ask .btn { padding: 0 22px; font-size: 1.05rem; }
+
+/* ==========================================================================
+   PASSAGE (the memorable part: a highlighter on paper)
+   ========================================================================== */
+.sheet {
+  margin-top: 18px;
+  background: var(--sheet);
+  border-radius: var(--r-sheet);
+  border: 1px solid var(--rule);
+  position: relative;
+}
+.sheet-bar {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 10px 18px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-size: .9rem;
+}
+.passage {
+  font: 400 1.12rem/1.75 var(--read);
+  padding: 22px 28px 26px;
+  max-height: 46vh; overflow: auto;
+  white-space: pre-wrap;
+  transition: color .3s ease;
+}
+.passage .empty { color: var(--ink-soft); font-family: var(--ui); }
+.passage mark {
+  color: inherit;
+  background-image: linear-gradient(transparent 12%, var(--marker) 12%, var(--marker) 88%, transparent 88%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0 2px; margin: 0 -2px;
+  border-radius: 2px;
+  animation: swipe .55s cubic-bezier(.3, .7, .2, 1) both;
+}
+@keyframes swipe { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+.sheet.abstained .passage { color: #8a96a3; }
+.editor {
+  display: none; width: 100%; min-height: 260px; border: 0; resize: vertical;
+  font: 400 1.05rem/1.7 var(--read); padding: 22px 28px; background: var(--sheet);
+  border-radius: 0 0 var(--r-sheet) var(--r-sheet);
+}
+.sheet.editing .passage { display: none; }
+.sheet.editing .editor { display: block; }
+.over { color: var(--pencil); font-weight: 700; }
+
+/* ==========================================================================
+   VERDICT
+   ========================================================================== */
+.verdict {
+  margin-top: 18px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: end;
+  min-height: 92px;
+}
+.verdict .answer { font: 600 1.7rem/1.25 var(--read); overflow-wrap: anywhere; }
+.verdict .answer.null {
+  color: var(--pencil);
+  text-decoration: underline wavy var(--pencil) 1.5px;
+  text-underline-offset: 6px;
+}
+.verdict .sub { color: var(--ink-soft); grid-column: 1 / -1; }
+.verdict .sub strong { color: var(--ink); }
+.verdict .ref-ok { color: var(--ok); font-weight: 700; }
+.verdict .ref-no { color: var(--pencil); font-weight: 700; }
+.meter { width: 220px; }
+.meter-label { display: flex; justify-content: space-between; font-size: .9rem; color: var(--ink-soft); }
+.meter-track { height: 8px; background: var(--rule); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+.meter-fill { height: 100%; width: 0; background: var(--ink); transition: width .4s ease; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--ink-soft); font-size: .92rem; margin-top: 10px; }
+.facts b { color: var(--ink); font-weight: 700; }
+.error { color: var(--pencil); font-weight: 700; }
+@media (max-width: 880px) { .verdict { grid-template-columns: 1fr; } .meter { width: 100%; } .passage { padding: 18px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .passage mark { animation: none; }
+  .meter-fill, .passage { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- =====================================================================
+       HEADER: title, API status, token
+       ===================================================================== -->
+  <header class="head">
+    <div class="title">
+      <h1>Ask the passage</h1>
+      <p>Our fine-tuned encoder reads the text and marks the exact words that answer the question, or says the text does not contain an answer.</p>
+    </div>
+    <div class="conn">
+      <div class="status" id="status" data-state="unknown" aria-live="polite"><span class="dot"></span><span id="status-text">Checking the service</span></div>
+      <form class="token" id="token-form" autocomplete="off">
+        <label class="visually-hidden" for="token">API token</label>
+        <input id="token" type="password" placeholder="Paste the API token" spellcheck="false">
+        <button class="btn" type="submit">Connect</button>
+      </form>
+      <div class="model-line" id="model-line"></div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       SIDEBAR: example questions and this session's history
+       ===================================================================== -->
+  <aside class="side">
+    <h2>Try a question</h2>
+    <div id="sample-groups"></div>
+    <section class="history" aria-label="Questions asked in this session">
+      <h2>This session</h2>
+      <ol id="history"><li>Nothing asked yet.</li></ol>
+    </section>
+  </aside>
+
+  <!-- =====================================================================
+       MAIN: question, passage, verdict
+       ===================================================================== -->
+  <main class="main">
+    <form class="ask" id="ask-form">
+      <label class="visually-hidden" for="question">Question</label>
+      <input id="question" maxlength="500" placeholder="Ask something about the passage" autocomplete="off">
+      <button class="btn" id="ask-btn" type="submit" disabled>Ask</button>
+    </form>
+
+    <section class="sheet" id="sheet" aria-label="Passage">
+      <div class="sheet-bar">
+        <span id="char-count">0 / 5000 characters</span>
+        <button class="btn btn-quiet" type="button" id="edit-btn">Edit passage</button>
+      </div>
+      <div class="passage" id="passage"><span class="empty">Pick an example on the left, or choose Edit passage and paste your own English text.</span></div>
+      <label class="visually-hidden" for="editor">Passage text</label>
+      <textarea class="editor" id="editor" maxlength="5000" spellcheck="false"></textarea>
+    </section>
+
+    <section class="verdict" id="verdict" aria-live="polite">
+      <div>
+        <div class="answer" id="answer"></div>
+      </div>
+      <div class="meter" id="meter" hidden>
+        <div class="meter-label"><span>Confidence</span><span id="meter-value"></span></div>
+        <div class="meter-track"><div class="meter-fill" id="meter-fill"></div></div>
+      </div>
+      <div class="sub" id="sub"></div>
+    </section>
+    <div class="facts" id="facts"></div>
+  </main>
+</div>
+
+<script>
+/* ==========================================================================
+   DATA: examples (public sample, our shadow set, the contract's example)
+   ========================================================================== */
+const SAMPLES = [{"group": "Public sample", "id": "sample-01", "question": "How many attention heads does BERT-large have?", "context": "BERT (Bidirectional Encoder Representations from Transformers) was introduced by researchers at Google in 2018. Unlike left-to-right language models, BERT is pre-trained to use context from both directions at every layer. Two model sizes were released: BERT-base, with 12 layers, a hidden size of 768 and 12 attention heads, and BERT-large, with 24 layers, a hidden size of 1024 and 16 attention heads. Pre-training used the BooksCorpus and English Wikipedia and combined two objectives: masked language modeling and next sentence prediction.", "answers": ["16", "16 attention heads"]}, {"group": "Public sample", "id": "sample-02", "question": "How long was the big Transformer model trained?", "context": "The Transformer, proposed in the 2017 paper \"Attention Is All You Need\", replaced recurrence with attention. Its core operation, scaled dot-product attention, computes the dot products of a query with all keys and divides each of them by the square root of the key dimension before applying a softmax. The authors trained their base model for 100,000 steps, about 12 hours, on eight NVIDIA P100 GPUs, while the big model was trained for 3.5 days.", "answers": ["3.5 days"]}, {"group": "Public sample", "id": "sample-03", "question": "How much were the crowdworkers paid to write the unanswerable questions?", "context": "SQuAD 2.0 extends the Stanford Question Answering Dataset with questions that cannot be answered from the given paragraph. It combines the existing SQuAD data with over 50,000 unanswerable questions written adversarially by crowdworkers to look similar to answerable ones. To do well, a system must not only answer questions when possible, but also determine when no answer is supported by the paragraph and abstain from answering.", "answers": []}, {"group": "Public sample", "id": "sample-04", "question": "By how many times does LoRA reduce the GPU memory requirement when fine-tuning BERT-base?", "context": "Low-Rank Adaptation (LoRA) freezes the pre-trained model weights and injects trainable rank decomposition matrices into each layer of the Transformer architecture. Compared to GPT-3 175B fine-tuned with Adam, LoRA can reduce the number of trainable parameters by 10,000 times and the GPU memory requirement by 3 times. Because the trainable matrices can be merged with the frozen weights when the model is deployed, LoRA introduces no additional inference latency.", "answers": []}, {"group": "Public sample", "id": "sample-05", "question": "How many tokens are in the GPT-2 vocabulary?", "context": "Language models do not read raw text. Before any computation happens, a tokenizer splits the input into units drawn from a fixed vocabulary and maps each unit to an integer id. The design of this vocabulary is a trade-off. A vocabulary of whole words is easy to interpret, but it cannot represent words that never appeared in the training data, and it grows very large for languages with rich morphology. A vocabulary of single characters can represent any string, but it produces very long sequences, which is expensive for attention, whose cost grows quadratically with sequence length. Subword tokenization sits between these two extremes: frequent words are kept as single tokens, while rare words are split into smaller pieces that the model has seen many times.\n\nByte Pair Encoding (BPE) is the best known subword method. It was originally a data compression algorithm, and it was adapted to neural machine translation in 2016. Training starts from a vocabulary of individual characters. The algorithm counts every pair of adjacent symbols in the corpus, merges the most frequent pair into a new symbol, and repeats the process until the vocabulary reaches the desired size. At inference time, the learned merges are applied in the same order to segment new text. Because merges are learned from frequency, common words such as \"the\" end up as single tokens, while a rare word may be split into three or four pieces.\n\nWordPiece, the tokenizer used by BERT, follows a similar bottom-up procedure, but chooses merges that most increase the likelihood of the training data instead of simply picking the most frequent pair. BERT marks pieces that continue a word with a double hash prefix, so a word may appear as a first piece followed by one or more pieces such as \"##ing\". The Unigram language model tokenizer works in the opposite direction: it starts from a large set of candidate subwords and repeatedly removes the ones whose loss has the least impact on the likelihood of the corpus.\n\nSentencePiece is a library that implements both BPE and the Unigram model. Its main difference is that it treats the input as a raw stream of characters, including spaces, so it does not need a language-specific pre-tokenizer that splits text into words first. This makes it convenient for languages that do not separate words with spaces.\n\nTokenization has direct consequences for engineering. The maximum input length of a model is measured in tokens, not in words or characters, so the same paragraph can fit within the limit for one tokenizer and exceed it for another. Text in languages that were rare in the tokenizer's training data is usually split into more tokens, which makes it slower and more expensive to process. In extractive question answering, the tokenizer must also keep track of character offsets, so that the start and end tokens predicted by the model can be mapped back to an exact span of the original text.\n\nByte-level BPE, introduced with GPT-2, applies the merge procedure to bytes instead of Unicode characters. Since every string is a sequence of bytes, no input is ever out of vocabulary. GPT-2 uses a byte-level BPE vocabulary of 50,257 tokens.", "answers": ["50,257", "50,257 tokens"]}, {"group": "Our test set", "id": "shadow-02", "question": "When was Joya de Cerén discovered?", "context": "Joya de Cerén is a pre-Columbian farming village in the department of La Libertad, El Salvador. Around the year 600, the eruption of the nearby Loma Caldera volcano buried the village under several meters of volcanic ash. Because the inhabitants fled quickly, the site preserved houses, kitchens, storehouses and even cultivated fields of maize and manioc. The site was discovered in 1976, when a bulldozer uncovered the remains of a building during construction work. Systematic excavations began in 1978 under the direction of the archaeologist Payson Sheets. In 1993, Joya de Cerén was added to the UNESCO World Heritage List. It is often called the \"Pompeii of the Americas\" because it shows the daily life of ordinary farmers rather than the palaces of rulers.", "answers": ["1976", "in 1976"]}, {"group": "Our test set", "id": "shadow-07", "question": "How high is the Santa Ana Volcano?", "context": "The Santa Ana Volcano, also known by its indigenous name Ilamatepec, is the highest volcano in El Salvador, with a summit elevation of about 2,381 meters. It is a stratovolcano located in the department of Santa Ana, west of the capital. Its summit contains a series of nested craters, and the innermost one holds a small acidic lake whose color changes from green to yellow. The most recent eruption took place on 1 October 2005; it threw rocks and ash over nearby coffee plantations and forced thousands of residents to evacuate. The volcano is part of the Los Volcanes National Park, together with the Izalco and Cerro Verde volcanoes. Hikers usually reach the crater in about two hours from the park entrance.", "answers": ["about 2,381 meters", "2,381 meters"]}, {"group": "Our test set", "id": "shadow-13", "question": "What does 503 Service Unavailable mean?", "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.", "answers": ["the server is temporarily unable to handle the request"]}, {"group": "Our test set", "id": "shadow-32", "question": "Into what size patches does the Vision Transformer split an image?", "context": "For most of the 2000s, computer vision relied on hand-designed features such as SIFT and HOG, which were extracted from images and passed to a separate classifier. Progress was measured on benchmarks that were small by modern standards, and improvements from one year to the next were often only a few percentage points.\n\nThis changed with ImageNet, a dataset of more than 14 million labeled images created by a project led by Fei-Fei Li. Its yearly competition, the ImageNet Large Scale Visual Recognition Challenge (ILSVRC), used a subset of about 1.2 million training images in 1,000 categories. In 2012, a convolutional neural network called AlexNet, developed by Alex Krizhevsky, Ilya Sutskever and Geoffrey Hinton, won the challenge with a top-5 error of 15.3%, compared with 26.2% for the second-best entry. AlexNet was trained on two GPUs and used ReLU activations and dropout, ideas that quickly became standard.\n\nIn the following years, networks became deeper. VGG, from the Visual Geometry Group at the University of Oxford, showed in 2014 that stacking many small 3x3 convolutions in networks of 16 or 19 layers improved accuracy. However, simply adding layers eventually made results worse: very deep plain networks were harder to optimize, and their training error went up instead of down.\n\nAlso in 2014, GoogLeNet, from Google, won the classification task with its Inception modules, which apply convolutions of several sizes in parallel and concatenate the results. Despite being deeper than AlexNet, it used about 12 times fewer parameters.\n\nResidual networks, or ResNets, solved this degradation problem. Proposed in 2015 by Kaiming He and colleagues at Microsoft Research, they add shortcut connections that skip one or more layers, so that each block only has to learn a residual function with respect to its input. With these connections, the authors trained networks with 152 layers, and an ensemble of ResNets won ILSVRC 2015 with a top-5 error of 3.57%. Batch normalization, introduced the same year by Sergey Ioffe and Christian Szegedy, normalizes the activations of each layer over a mini-batch and was used throughout these networks to stabilize training.\n\nNetworks pre-trained on ImageNet also became the standard starting point for other tasks. Instead of training from scratch, practitioners take a network trained on ImageNet, replace its final classification layer, and fine-tune it on a smaller dataset, a practice known as transfer learning.\n\nThe next shift came from natural language processing. In 2020, the Vision Transformer (ViT) applied a standard Transformer encoder directly to images. It splits an image into patches of 16x16 pixels, flattens each patch into a vector, adds a position embedding, and processes the resulting sequence exactly like a sequence of word tokens. When pre-trained on very large datasets, ViT matched or exceeded the best convolutional networks, although with less data it tended to perform worse, because it lacks the built-in assumptions about locality that convolutions provide.", "answers": ["16x16 pixels", "patches of 16x16 pixels", "16x16"]}, {"group": "Our test set", "id": "shadow-14", "question": "Which status code means that the client has sent too many requests?", "context": "HTTP status codes tell a client how a server handled its request. Codes in the 2xx range indicate success: 200 OK is the most common, and 201 Created is returned when a new resource has been created. Codes in the 4xx range indicate a client error. A server returns 400 Bad Request when the request is malformed, and 401 Unauthorized when the request lacks valid authentication credentials; in that case the response should include a WWW-Authenticate header describing how to authenticate. 403 Forbidden means that the server understood who the client is but refuses to authorize the action. 422 Unprocessable Content is used when the syntax of the request is correct but its content fails validation. Codes in the 5xx range indicate a server error: 500 Internal Server Error is a generic failure, and 503 Service Unavailable means that the server is temporarily unable to handle the request, for example while it is starting up or overloaded.", "answers": []}, {"group": "Our test set", "id": "shadow-19", "question": "What learning rate does AdamW recommend for fine-tuning BERT?", "context": "Adam is an algorithm for first-order gradient-based optimization of stochastic objective functions, introduced by Diederik Kingma and Jimmy Ba in 2014. The name is derived from adaptive moment estimation. Adam keeps an exponential moving average of the gradient, called the first moment, and of the squared gradient, called the second moment. Because both averages are initialized at zero, they are biased towards zero during the first steps, so the algorithm applies a bias correction. The paper recommends a learning rate of 0.001, decay rates of 0.9 for the first moment and 0.999 for the second moment, and an epsilon of 10^-8. A popular variant, AdamW, decouples weight decay from the gradient update and is the default optimizer for fine-tuning Transformer models.", "answers": []}, {"group": "Our test set", "id": "shadow-24", "question": "Who is the current CEO of Docker, Inc.?", "context": "Docker is a platform for packaging applications into containers. It was released as open-source software in 2013 by the company dotCloud, which later renamed itself Docker, Inc. A container bundles an application with its libraries and configuration, but unlike a virtual machine it does not include a full guest operating system: all containers on a host share the host's kernel. This makes containers lighter and faster to start than virtual machines. Images are built from a text file called a Dockerfile, in which each instruction creates a new read-only layer. Layers are cached, so rebuilding an image after a small change only rebuilds the layers that follow the change. A running instance of an image is called a container.", "answers": []}, {"group": "API contract example", "id": "q-017", "question": "How long is the Lempa River?", "context": "The Lempa River is the longest river in El Salvador, flowing about 422 km from Guatemala to the Pacific Ocean.", "answers": ["about 422 km"]}, {"group": "API contract example", "id": "q-018", "question": "When was the first dam built on the Lempa River?", "context": "The Lempa River is the longest river in El Salvador, flowing about 422 km from Guatemala to the Pacific Ocean.", "answers": []}];
+
+/* ==========================================================================
+   STATE
+   ========================================================================== */
+const state = { token: "", ready: false, connected: false, maxSeq: 384, context: "", currentSample: null, askCount: 0, history: [] };
+const $ = (id) => document.getElementById(id);
+
+/* ==========================================================================
+   HELPERS
+   ========================================================================== */
+const escapeHtml = (s) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const normalize = (s) => (s || "").toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, " ").replace(/\b(a|an|the)\b/g, " ").replace(/\s+/g, " ").trim();
+const formatParams = (n) => n >= 1e6 ? `${(n / 1e6).toFixed(0)}M parameters` : `${n} parameters`;
+
+function setStatus(stateName, text) {
+  $("status").dataset.state = stateName;
+  $("status-text").textContent = text;
+}
+
+function refreshAskButton() {
+  $("ask-btn").disabled = !(state.ready && state.connected && state.context.trim() && $("question").value.trim());
+}
+
+/* ==========================================================================
+   HEALTH: poll /health so the page shows when the model is ready
+   ========================================================================== */
+async function checkHealth() {
+  try {
+    const r = await fetch("/health", { cache: "no-store" });
+    if (r.status === 200) { state.ready = true; setStatus("ok", "Model ready"); }
+    else { state.ready = false; setStatus("loading", "Model loading"); }
+  } catch {
+    state.ready = false; setStatus("down", "Service unreachable. Is the API running?");
+  }
+  refreshAskButton();
+}
+
+/* ==========================================================================
+   TOKEN: kept only in this page's memory, sent as a Bearer header
+   ========================================================================== */
+$("token-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  state.token = $("token").value.trim();
+  if (!state.token) return;
+  try {
+    const r = await fetch("/info", { headers: { Authorization: `Bearer ${state.token}` } });
+    if (r.status === 401) {
+      state.connected = false;
+      $("model-line").innerHTML = '<span class="error">Token rejected. Use the value of QA_API_TOKEN.</span>';
+    } else if (r.ok) {
+      const d = await r.json();
+      state.connected = true;
+      state.maxSeq = d.max_seq_length || state.maxSeq;
+      $("model-line").textContent = `${d.model}, ${formatParams(d.params)}, windows of ${d.max_seq_length} tokens, team ${d.team}`;
+    } else {
+      state.connected = false;
+      $("model-line").innerHTML = `<span class="error">The service answered ${r.status}. Wait for the model to load and connect again.</span>`;
+    }
+  } catch {
+    state.connected = false;
+    $("model-line").innerHTML = '<span class="error">Could not reach the service.</span>';
+  }
+  refreshAskButton();
+});
+
+/* ==========================================================================
+   SAMPLES: grouped list in the sidebar
+   ========================================================================== */
+function renderSamples() {
+  const groups = {};
+  SAMPLES.forEach((s, i) => (groups[s.group] = groups[s.group] || []).push(i));
+  const root = $("sample-groups");
+  for (const [name, idxs] of Object.entries(groups)) {
+    const label = document.createElement("div");
+    label.className = "group-name";
+    label.textContent = name;
+    const ul = document.createElement("ul");
+    ul.className = "samples";
+    idxs.forEach((i) => {
+      const s = SAMPLES[i];
+      const li = document.createElement("li");
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.index = i;
+      const tag = s.answers.length ? (s.context.length > 2000 ? "Long passage" : "Has an answer") : "No answer in the text";
+      b.innerHTML = `${escapeHtml(s.question)}<span class="tag">${tag}</span>`;
+      b.addEventListener("click", () => loadSample(i));
+      li.appendChild(b);
+      ul.appendChild(li);
+    });
+    root.append(label, ul);
+  }
+}
+
+function loadSample(i) {
+  const s = SAMPLES[i];
+  state.currentSample = s;
+  document.querySelectorAll(".samples button").forEach((b) => b.setAttribute("aria-current", String(Number(b.dataset.index) === i)));
+  $("question").value = s.question;
+  setContext(s.context);
+  clearVerdict();
+  $("sheet").classList.remove("editing");
+  $("edit-btn").textContent = "Edit passage";
+  $("question").focus();
+}
+
+/* ==========================================================================
+   PASSAGE: render, edit, highlight
+   ========================================================================== */
+function setContext(text) {
+  state.context = text;
+  $("editor").value = text;
+  renderPassage(null, null);
+  updateCount();
+}
+
+function renderPassage(start, answer) {
+  const ctx = state.context;
+  const el = $("passage");
+  if (!ctx) {
+    el.innerHTML = '<span class="empty">Pick an example on the left, or choose Edit passage and paste your own English text.</span>';
+    return;
+  }
+  if (answer == null) { el.innerHTML = escapeHtml(ctx); return; }
+  const end = start + answer.length;
+  el.innerHTML = escapeHtml(ctx.slice(0, start)) + "<mark>" + escapeHtml(ctx.slice(start, end)) + "</mark>" + escapeHtml(ctx.slice(end));
+  const mark = el.querySelector("mark");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (mark) {
+    const top = mark.offsetTop - el.clientHeight / 3;
+    el.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
+  }
+}
+
+function updateCount() {
+  const n = state.context.length;
+  $("char-count").innerHTML = n > 5000 ? `<span class="over">${n} / 5000 characters, too long</span>` : `${n} / 5000 characters`;
+  refreshAskButton();
+}
+
+$("edit-btn").addEventListener("click", () => {
+  const sheet = $("sheet");
+  const editing = sheet.classList.toggle("editing");
+  $("edit-btn").textContent = editing ? "Done editing" : "Edit passage";
+  if (editing) { $("editor").focus(); }
+  else { state.currentSample = null; setContext($("editor").value); clearVerdict(); }
+});
+$("editor").addEventListener("input", () => { state.context = $("editor").value; state.currentSample = null; updateCount(); });
+$("question").addEventListener("input", refreshAskButton);
+
+/* ==========================================================================
+   ASK: POST /predict and show the verdict
+   ========================================================================== */
+function clearVerdict() {
+  $("answer").textContent = "";
+  $("answer").className = "answer";
+  $("sub").textContent = "";
+  $("facts").textContent = "";
+  $("meter").hidden = true;
+  $("sheet").classList.remove("abstained");
+}
+
+$("ask-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if ($("ask-btn").disabled) return;
+  if ($("sheet").classList.contains("editing")) { $("edit-btn").click(); }
+  const question = $("question").value.trim();
+  const context = state.context;
+  const id = `demo-${++state.askCount}`;
+  clearVerdict();
+  $("answer").textContent = "Reading…";
+  $("ask-btn").disabled = true;
+
+  const t0 = performance.now();
+  let r;
+  try {
+    r = await fetch("/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${state.token}` },
+      body: JSON.stringify({ id, context, question }),
+    });
+  } catch {
+    $("answer").innerHTML = '<span class="error">Could not reach the service.</span>';
+    refreshAskButton();
+    return;
+  }
+  const roundTrip = Math.round(performance.now() - t0);
+  const body = await r.json().catch(() => ({}));
+  refreshAskButton();
+
+  if (!r.ok) {
+    const msg = r.status === 401 ? "Token rejected. Connect again with the right token."
+      : r.status === 503 ? "The model is still loading. Try again in a few seconds."
+      : body.detail ? `The request was rejected: ${body.detail}.` : `The service answered ${r.status}.`;
+    $("answer").innerHTML = `<span class="error">${escapeHtml(msg)}</span>`;
+    return;
+  }
+
+  const isNull = body.answer === null;
+  const pct = Math.round((body.score || 0) * 100);
+  $("meter").hidden = false;
+  $("meter-value").textContent = `${pct}%`;
+  requestAnimationFrame(() => { $("meter-fill").style.width = `${pct}%`; });
+
+  if (isNull) {
+    $("answer").textContent = "Not in the text";
+    $("answer").className = "answer null";
+    $("sheet").classList.add("abstained");
+    renderPassage(null, null);
+  } else {
+    $("answer").textContent = body.answer;
+    renderPassage(body.start, body.answer);
+  }
+
+  // Reference check for the built-in examples
+  const s = state.currentSample && state.currentSample.question === question ? state.currentSample : null;
+  let sub = isNull ? "The model decided the passage does not answer this question." : `Copied from the passage at character ${body.start}.`;
+  if (s) {
+    if (!s.answers.length) {
+      sub += isNull ? ' <span class="ref-ok">Correct: this question has no answer in the text.</span>'
+                    : ' <span class="ref-no">The reference says there is no answer in the text.</span>';
+    } else {
+      const hit = !isNull && s.answers.some((a) => normalize(a) === normalize(body.answer));
+      sub += hit ? ' <span class="ref-ok">Matches the reference answer.</span>'
+                 : ` <span class="ref-no">Reference: ${escapeHtml(s.answers[0])}</span>`;
+    }
+  }
+  $("sub").innerHTML = sub;
+
+  const server = r.headers.get("X-Inference-Ms");
+  const windows = r.headers.get("X-Windows");
+  const facts = [`<span>Round trip <b>${roundTrip} ms</b></span>`];
+  if (server) facts.push(`<span>Model time <b>${server} ms</b></span>`);
+  if (windows) facts.push(`<span>Read in <b>${windows}</b> window${windows === "1" ? "" : "s"} of ${state.maxSeq} tokens</span>`);
+  facts.push(`<span>${context.length} characters</span>`);
+  $("facts").innerHTML = facts.join("");
+
+  state.history.unshift({ question, answer: body.answer, pct });
+  $("history").innerHTML = state.history.slice(0, 8).map((h) =>
+    `<li>${escapeHtml(h.question)}<br>${h.answer === null ? '<span class="h-null">Not in the text</span>' : `<span class="h-ans">${escapeHtml(h.answer)}</span>`} (${h.pct}%)</li>`
+  ).join("");
+});
+
+/* ==========================================================================
+   START
+   ========================================================================== */
+renderSamples();
+checkHealth();
+setInterval(checkHealth, 5000);
+</script>
+</body>
+</html>

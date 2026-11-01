@@ -1,6 +1,7 @@
 """Extractive QA web service implementing docs/brief/qa_api_contract.yaml.
 
     GET  /health   public     200 {"status": "ok"} | 503 {"status": "loading"}
+    GET  /demo     public     static demo page for the pitch (calls /info and /predict with the token typed in it)
     GET  /info     protected  200 {"team", "model", "params", "max_seq_length", "doc_stride"}
     POST /predict  protected  200 {"id", "answer", "start", "score"}
 
@@ -15,11 +16,12 @@ import logging
 import threading
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import torch
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -30,6 +32,7 @@ log = logging.getLogger("qa-service")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 
 PROTECTED_PATHS = {"/info", "/predict"}
+DEMO_PAGE = Path(__file__).resolve().parent / "static" / "demo.html"
 
 
 # ---------------------------------------------------------------------------- schemas
@@ -141,6 +144,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             return {"status": "ok"}
         return JSONResponse(status_code=503, content={"status": "loading"})
 
+    # Static page only: it holds no data and no token; protected calls still need the bearer token.
+    @app.get("/demo")
+    def demo():
+        return FileResponse(DEMO_PAGE, media_type="text/html")
+
     @app.get("/info")
     def info():
         if not state.ready:
@@ -180,7 +188,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return JSONResponse(
             content={"id": req.id, "answer": answer, "start": start,
                      "score": round(min(max(pred.score, 0.0), 1.0), 4)},
-            headers={"X-Inference-Ms": f"{ms:.0f}"},
+            headers={"X-Inference-Ms": f"{ms:.0f}", "X-Windows": str(pred.num_windows)},
         )
 
     return app

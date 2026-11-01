@@ -122,6 +122,17 @@ def test_limits_accepted(client):
     assert r.status_code == 200 and r.json()["id"] == "x" * 64
 
 
+def test_demo_page_is_public_and_static(client):
+    r = client.get("/demo")
+    assert r.status_code == 200 and r.headers["content-type"].startswith("text/html")
+    assert "Ask the passage" in r.text and "QA_API_TOKEN=" not in r.text
+
+
+def test_predict_exposes_timing_headers(client):
+    r = client.post("/predict", headers=AUTH, json=body(SAMPLE[0]))
+    assert r.headers["x-windows"].isdigit() and r.headers["x-inference-ms"].isdigit()
+
+
 def test_no_docs_exposed(client):
     for p in ("/docs", "/openapi.json", "/redoc"):
         assert client.get(p).status_code == 404
