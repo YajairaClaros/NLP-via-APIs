@@ -3,14 +3,22 @@
 .env.*
 !.env.example
 
-# --- Model weights and checkpoints stay out of git (shared via release / shared folder) ---
+# --- Model weights and checkpoints stay out of git (shared through Google Drive) ---
 models/*
 !models/.gitkeep
 checkpoints/
 *.safetensors
 *.bin
 *.pt
+*.pth
 *.onnx
+
+# --- Tunnel binaries and downloads (installed on the laptop, never part of the repo) ---
+ngrok.exe
+ngrok.zip
+cloudflared.exe
+*.msi
+*.zip
 
 # --- Python / tooling ---
 __pycache__/
@@ -19,5 +27,12 @@ __pycache__/
 venv/
 .pytest_cache/
 .ipynb_checkpoints/
-.DS_Store
 hf_cache/
+*.log
+
+# --- Editors and OS files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
