@@ -1,0 +1,607 @@
+{
+ "dataset": "shadow_set",
+ "n": 33,
+ "model_dir": "models\\roberta-base",
+ "seconds": 1.7,
+ "best_threshold_for_this_dataset": -2.3460340055227302,
+ "at_best_threshold_for_this_dataset": {
+  "em": 90.91,
+  "f1": 93.02,
+  "null_rate": 27.27,
+  "has_ans_em": 88.0,
+  "has_ans_f1": 90.78,
+  "no_ans_acc": 100.0
+ },
+ "selected_threshold": -2.049049187183382,
+ "at_selected_threshold": {
+  "em": 90.91,
+  "f1": 93.02,
+  "null_rate": 27.27,
+  "has_ans_em": 88.0,
+  "has_ans_f1": 90.78,
+  "no_ans_acc": 100.0
+ },
+ "at_threshold_0": {
+  "em": 87.88,
+  "f1": 89.99,
+  "null_rate": 24.24,
+  "has_ans_em": 88.0,
+  "has_ans_f1": 90.78,
+  "no_ans_acc": 87.5
+ },
+ "current_threshold": 0.0,
+ "at_current_threshold": {
+  "em": 87.88,
+  "f1": 89.99,
+  "null_rate": 24.24,
+  "has_ans_em": 88.0,
+  "has_ans_f1": 90.78,
+  "no_ans_acc": 87.5
+ },
+ "predictions": [
+  {
+   "id": "shadow-01",
+   "question": "Which volcano buried Joya de Cer\u00e9n?",
+   "gold": [
+    "Loma Caldera",
+    "the nearby Loma Caldera volcano",
+    "Loma Caldera volcano"
+   ],
+   "best_span": "Loma Caldera volcano",
+   "best_span_start": 144,
+   "diff": -6.329218864440918,
+   "null_score": 4.892871856689453,
+   "span_score": 11.222090721130371,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-02",
+   "question": "When was Joya de Cer\u00e9n discovered?",
+   "gold": [
+    "1976",
+    "in 1976"
+   ],
+   "best_span": "1976",
+   "best_span_start": 384,
+   "diff": -9.001043558120728,
+   "null_score": 3.0395076274871826,
+   "span_score": 12.04055118560791,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-03",
+   "question": "Who directed the systematic excavations at Joya de Cer\u00e9n?",
+   "gold": [
+    "Payson Sheets",
+    "the archaeologist Payson Sheets"
+   ],
+   "best_span": "Payson Sheets",
+   "best_span_start": 547,
+   "diff": -13.939880847930908,
+   "null_score": 3.7498621940612793,
+   "span_score": 17.689743041992188,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-04",
+   "question": "What crops were found in the cultivated fields?",
+   "gold": [
+    "maize and manioc"
+   ],
+   "best_span": "maize and manioc",
+   "best_span_start": 339,
+   "diff": -8.183737754821777,
+   "null_score": 5.844904899597168,
+   "span_score": 14.028642654418945,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-05",
+   "question": "When did the Loma Caldera volcano erupt for the last time?",
+   "gold": [],
+   "best_span": "600",
+   "best_span_start": 112,
+   "diff": 7.418234348297119,
+   "null_score": 10.139122009277344,
+   "span_score": 2.7208876609802246,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-06",
+   "question": "What is the indigenous name of the Santa Ana Volcano?",
+   "gold": [
+    "Ilamatepec"
+   ],
+   "best_span": "Ilamatepec",
+   "best_span_start": 57,
+   "diff": -14.44008493423462,
+   "null_score": 1.9659209251403809,
+   "span_score": 16.406005859375,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-07",
+   "question": "How high is the Santa Ana Volcano?",
+   "gold": [
+    "about 2,381 meters",
+    "2,381 meters"
+   ],
+   "best_span": "2,381 meters",
+   "best_span_start": 141,
+   "diff": -11.75155371427536,
+   "null_score": 0.9297130703926086,
+   "span_score": 12.681266784667969,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-08",
+   "question": "When did the most recent eruption of the Santa Ana Volcano take place?",
+   "gold": [
+    "1 October 2005",
+    "on 1 October 2005"
+   ],
+   "best_span": "1 October 2005",
+   "best_span_start": 415,
+   "diff": -15.800239324569702,
+   "null_score": 2.6174471378326416,
+   "span_score": 18.417686462402344,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-09",
+   "question": "Which other volcanoes belong to Los Volcanes National Park?",
+   "gold": [
+    "the Izalco and Cerro Verde volcanoes",
+    "Izalco and Cerro Verde"
+   ],
+   "best_span": "Izalco and Cerro Verde volcanoes",
+   "best_span_start": 605,
+   "diff": -12.697265625,
+   "null_score": 4.962060928344727,
+   "span_score": 17.659326553344727,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-10",
+   "question": "How many residents were injured during the 2005 eruption?",
+   "gold": [],
+   "best_span": "thousands",
+   "best_span_start": 496,
+   "diff": -2.039285659790039,
+   "null_score": 2.976743698120117,
+   "span_score": 5.016029357910156,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-11",
+   "question": "Which status code is returned when a new resource has been created?",
+   "gold": [
+    "201 Created",
+    "201"
+   ],
+   "best_span": "201 Created",
+   "best_span_start": 138,
+   "diff": -12.185932636260986,
+   "null_score": 4.679257869720459,
+   "span_score": 16.865190505981445,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-12",
+   "question": "Which header should a 401 response include?",
+   "gold": [
+    "WWW-Authenticate",
+    "a WWW-Authenticate header",
+    "WWW-Authenticate header"
+   ],
+   "best_span": "WWW-Authenticate",
+   "best_span_start": 433,
+   "diff": -2.388101577758789,
+   "null_score": 9.844945907592773,
+   "span_score": 12.233047485351562,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-13",
+   "question": "What does 503 Service Unavailable mean?",
+   "gold": [
+    "the server is temporarily unable to handle the request"
+   ],
+   "best_span": "the server is temporarily unable to handle the request",
+   "best_span_start": 836,
+   "diff": -10.627847909927368,
+   "null_score": 3.9974582195281982,
+   "span_score": 14.625306129455566,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-14",
+   "question": "Which status code means that the client has sent too many requests?",
+   "gold": [],
+   "best_span": "HTTP",
+   "best_span_start": 0,
+   "diff": 8.242593467235565,
+   "null_score": 7.74301815032959,
+   "span_score": -0.49957531690597534,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-15",
+   "question": "Who introduced Adam?",
+   "gold": [
+    "Diederik Kingma and Jimmy Ba"
+   ],
+   "best_span": "Diederik Kingma and Jimmy Ba",
+   "best_span_start": 114,
+   "diff": -12.062871932983398,
+   "null_score": 5.422555923461914,
+   "span_score": 17.485427856445312,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-16",
+   "question": "What does the name Adam stand for?",
+   "gold": [
+    "adaptive moment estimation"
+   ],
+   "best_span": "an algorithm for first-order gradient-based optimization of stochastic objective functions",
+   "best_span_start": 8,
+   "diff": -5.580054998397827,
+   "null_score": 1.7139875888824463,
+   "span_score": 7.294042587280273,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-17",
+   "question": "What decay rate is recommended for the second moment?",
+   "gold": [
+    "0.999"
+   ],
+   "best_span": "0.999",
+   "best_span_start": 578,
+   "diff": -8.965071678161621,
+   "null_score": 8.086491584777832,
+   "span_score": 17.051563262939453,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-18",
+   "question": "Why does Adam apply a bias correction?",
+   "gold": [
+    "they are biased towards zero during the first steps",
+    "both averages are initialized at zero"
+   ],
+   "best_span": "Because both averages are initialized at zero, they are biased towards zero during the first steps",
+   "best_span_start": 343,
+   "diff": -8.439924240112305,
+   "null_score": 4.123863220214844,
+   "span_score": 12.563787460327148,
+   "em_span": 0.0,
+   "f1_span": 0.6956521739130436,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-19",
+   "question": "What learning rate does AdamW recommend for fine-tuning BERT?",
+   "gold": [],
+   "best_span": "0.001",
+   "best_span_start": 527,
+   "diff": 7.810527801513672,
+   "null_score": 13.129171371459961,
+   "span_score": 5.318643569946289,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-20",
+   "question": "In what year was Docker released as open-source software?",
+   "gold": [
+    "2013",
+    "in 2013"
+   ],
+   "best_span": "2013",
+   "best_span_start": 108,
+   "diff": -13.152468204498291,
+   "null_score": 2.5604567527770996,
+   "span_score": 15.71292495727539,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-21",
+   "question": "What do all containers on a host share?",
+   "gold": [
+    "the host's kernel",
+    "host's kernel"
+   ],
+   "best_span": "the host's kernel",
+   "best_span_start": 362,
+   "diff": -9.27194595336914,
+   "null_score": 3.4904117584228516,
+   "span_score": 12.762357711791992,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-22",
+   "question": "What is the text file used to build Docker images called?",
+   "gold": [
+    "Dockerfile",
+    "a Dockerfile"
+   ],
+   "best_span": "Dockerfile",
+   "best_span_start": 497,
+   "diff": -11.107574939727783,
+   "null_score": 3.421943187713623,
+   "span_score": 14.529518127441406,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-23",
+   "question": "How much memory does a typical Docker container use?",
+   "gold": [],
+   "best_span": "lighter",
+   "best_span_start": 403,
+   "diff": 10.447819709777832,
+   "null_score": 1.231858253479004,
+   "span_score": -9.215961456298828,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-24",
+   "question": "Who is the current CEO of Docker, Inc.?",
+   "gold": [],
+   "best_span": "dotCloud",
+   "best_span_start": 128,
+   "diff": 20.85369062423706,
+   "null_score": 6.115952968597412,
+   "span_score": -14.737737655639648,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-25",
+   "question": "In which journal was dropout published?",
+   "gold": [
+    "the Journal of Machine Learning Research",
+    "Journal of Machine Learning Research"
+   ],
+   "best_span": "Journal of Machine Learning Research",
+   "best_span_start": 142,
+   "diff": -11.3574800491333,
+   "null_score": 4.371960639953613,
+   "span_score": 15.729440689086914,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-26",
+   "question": "With what probability should hidden units be retained?",
+   "gold": [
+    "0.5",
+    "a probability of 0.5"
+   ],
+   "best_span": "0.5",
+   "best_span_start": 502,
+   "diff": -6.408567428588867,
+   "null_score": 8.842028617858887,
+   "span_score": 15.250596046447754,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-27",
+   "question": "At test time, what are the outgoing weights multiplied by?",
+   "gold": [
+    "the probability with which it was retained during training"
+   ],
+   "best_span": "the probability with which it was retained during training",
+   "best_span_start": 712,
+   "diff": -6.310976028442383,
+   "null_score": 4.931046485900879,
+   "span_score": 11.242022514343262,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-28",
+   "question": "What dropout probability did the authors use for convolutional layers?",
+   "gold": [],
+   "best_span": "0.5",
+   "best_span_start": 502,
+   "diff": 5.48802375793457,
+   "null_score": 10.457293510437012,
+   "span_score": 4.969269752502441,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-29",
+   "question": "Who led the project that created ImageNet?",
+   "gold": [
+    "Fei-Fei Li"
+   ],
+   "best_span": "Fei-Fei Li",
+   "best_span_start": 427,
+   "diff": -13.222608089447021,
+   "null_score": 4.485081195831299,
+   "span_score": 17.70768928527832,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 3,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-30",
+   "question": "How many layers did the deepest ResNets have?",
+   "gold": [
+    "152",
+    "152 layers"
+   ],
+   "best_span": "152",
+   "best_span_start": 1894,
+   "diff": 7.838719487190247,
+   "null_score": 8.745685577392578,
+   "span_score": 0.9069660902023315,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 3,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "shadow-31",
+   "question": "What top-5 error did the ResNet ensemble achieve in ILSVRC 2015?",
+   "gold": [
+    "3.57%"
+   ],
+   "best_span": "3.57%.",
+   "best_span_start": 1971,
+   "diff": -3.9212684631347656,
+   "null_score": 8.20594596862793,
+   "span_score": 12.127214431762695,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 3,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-32",
+   "question": "Into what size patches does the Vision Transformer split an image?",
+   "gold": [
+    "16x16 pixels",
+    "patches of 16x16 pixels",
+    "16x16"
+   ],
+   "best_span": "16x16 pixels",
+   "best_span_start": 2664,
+   "diff": -6.328862190246582,
+   "null_score": 7.66367244720459,
+   "span_score": 13.992534637451172,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 3,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "shadow-33",
+   "question": "How many GPUs were used to train the Vision Transformer?",
+   "gold": [],
+   "best_span": "two",
+   "best_span_start": 838,
+   "diff": 8.304490327835083,
+   "null_score": 9.314399719238281,
+   "span_score": 1.0099093914031982,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 3,
+   "pred_null_at_selected": true
+  }
+ ]
+}

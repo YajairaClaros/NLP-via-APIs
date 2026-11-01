@@ -1,0 +1,126 @@
+{
+ "dataset": "public_sample",
+ "n": 5,
+ "model_dir": "models\\roberta-base",
+ "seconds": 0.3,
+ "best_threshold_for_this_dataset": -4.523922673344613,
+ "at_best_threshold_for_this_dataset": {
+  "em": 100.0,
+  "f1": 100.0,
+  "null_rate": 40.0,
+  "has_ans_em": 100.0,
+  "has_ans_f1": 100.0,
+  "no_ans_acc": 100.0
+ },
+ "selected_threshold": -2.049049187183382,
+ "at_selected_threshold": {
+  "em": 100.0,
+  "f1": 100.0,
+  "null_rate": 40.0,
+  "has_ans_em": 100.0,
+  "has_ans_f1": 100.0,
+  "no_ans_acc": 100.0
+ },
+ "at_threshold_0": {
+  "em": 80.0,
+  "f1": 80.0,
+  "null_rate": 20.0,
+  "has_ans_em": 100.0,
+  "has_ans_f1": 100.0,
+  "no_ans_acc": 50.0
+ },
+ "current_threshold": 0.0,
+ "at_current_threshold": {
+  "em": 80.0,
+  "f1": 80.0,
+  "null_rate": 20.0,
+  "has_ans_em": 100.0,
+  "has_ans_f1": 100.0,
+  "no_ans_acc": 50.0
+ },
+ "predictions": [
+  {
+   "id": "sample-01",
+   "question": "How many attention heads does BERT-large have?",
+   "gold": [
+    "16",
+    "16 attention heads"
+   ],
+   "best_span": "16",
+   "best_span_start": 383,
+   "diff": -7.7183146476745605,
+   "null_score": 5.056344509124756,
+   "span_score": 12.774659156799316,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "sample-02",
+   "question": "How long was the big Transformer model trained?",
+   "gold": [
+    "3.5 days"
+   ],
+   "best_span": "3.5 days",
+   "best_span_start": 437,
+   "diff": -8.920900821685791,
+   "null_score": 7.8017706871032715,
+   "span_score": 16.722671508789062,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 1,
+   "pred_null_at_selected": false
+  },
+  {
+   "id": "sample-03",
+   "question": "How much were the crowdworkers paid to write the unanswerable questions?",
+   "gold": [],
+   "best_span": "to look similar to answerable ones",
+   "best_span_start": 237,
+   "diff": 21.293167114257812,
+   "null_score": 6.371759414672852,
+   "span_score": -14.921407699584961,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "sample-04",
+   "question": "By how many times does LoRA reduce the GPU memory requirement when fine-tuning BERT-base?",
+   "gold": [],
+   "best_span": "3 times",
+   "best_span_start": 310,
+   "diff": -0.4283409118652344,
+   "null_score": 8.672203063964844,
+   "span_score": 9.100543975830078,
+   "em_span": 0.0,
+   "f1_span": 0.0,
+   "is_impossible": true,
+   "windows": 1,
+   "pred_null_at_selected": true
+  },
+  {
+   "id": "sample-05",
+   "question": "How many tokens are in the GPT-2 vocabulary?",
+   "gold": [
+    "50,257",
+    "50,257 tokens"
+   ],
+   "best_span": "50,257",
+   "best_span_start": 3157,
+   "diff": -4.532671928405762,
+   "null_score": 7.388764381408691,
+   "span_score": 11.921436309814453,
+   "em_span": 1.0,
+   "f1_span": 1.0,
+   "is_impossible": false,
+   "windows": 3,
+   "pred_null_at_selected": false
+  }
+ ]
+}

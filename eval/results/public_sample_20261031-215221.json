@@ -1,0 +1,101 @@
+{
+ "url": "https://alternate-politics-hierarchy-deals.trycloudflare.com",
+ "data": "C:\\Users\\yajai\\Documents\\NLP-via-APIs\\docs\\brief\\public_sample.json",
+ "summary": {
+  "items": 5,
+  "total_seconds": 8.9,
+  "projected_50_items_seconds": 88.9,
+  "latency_ms_mean": 1777,
+  "latency_ms_max": 3512,
+  "team_score_estimate": 1.0,
+  "team_score_strict": 1.0,
+  "team_score_optimistic": 1.0,
+  "live_points_estimate": 60.0,
+  "live_points_strict": 60.0,
+  "by_status": {
+   "exact match": 3,
+   "correct null": 2
+  }
+ },
+ "contract_failures": 0,
+ "items": [
+  {
+   "id": "sample-01",
+   "question": "How many attention heads does BERT-large have?",
+   "latency_ms": 844,
+   "server_ms": "265",
+   "status": "exact match",
+   "answer": "16",
+   "start": 383,
+   "score": 0.922,
+   "gold": [
+    "16",
+    "16 attention heads"
+   ],
+   "em": 1.0,
+   "f1": 1.0,
+   "item_score": 1.0
+  },
+  {
+   "id": "sample-02",
+   "question": "How long was the big Transformer model trained?",
+   "latency_ms": 1065,
+   "server_ms": "300",
+   "status": "exact match",
+   "answer": "3.5 days",
+   "start": 437,
+   "score": 0.9832,
+   "gold": [
+    "3.5 days"
+   ],
+   "em": 1.0,
+   "f1": 1.0,
+   "item_score": 1.0
+  },
+  {
+   "id": "sample-03",
+   "question": "How much were the crowdworkers paid to write the unanswerable questions?",
+   "latency_ms": 1435,
+   "server_ms": "569",
+   "status": "correct null",
+   "answer": null,
+   "start": null,
+   "score": 1.0,
+   "gold": [],
+   "em": 1.0,
+   "f1": 1.0,
+   "item_score": 1.0
+  },
+  {
+   "id": "sample-04",
+   "question": "By how many times does LoRA reduce the GPU memory requirement when fine-tuning BERT-base?",
+   "latency_ms": 2027,
+   "server_ms": "762",
+   "status": "correct null",
+   "answer": null,
+   "start": null,
+   "score": 0.2468,
+   "gold": [],
+   "em": 1.0,
+   "f1": 1.0,
+   "item_score": 1.0
+  },
+  {
+   "id": "sample-05",
+   "question": "How many tokens are in the GPT-2 vocabulary?",
+   "latency_ms": 3512,
+   "server_ms": "2272",
+   "status": "exact match",
+   "answer": "50,257",
+   "start": 3157,
+   "score": 0.7121,
+   "gold": [
+    "50,257",
+    "50,257 tokens"
+   ],
+   "em": 1.0,
+   "f1": 1.0,
+   "item_score": 1.0
+  }
+ ]
+}

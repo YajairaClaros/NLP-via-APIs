@@ -1,0 +1,52 @@
+{
+  "args": {
+    "model": "FacebookAI/roberta-base",
+    "run_name": null,
+    "train_file": null,
+    "validation_file": null,
+    "max_train_samples": null,
+    "max_eval_samples": 2000,
+    "epochs": 2.0,
+    "lr": 3e-05,
+    "batch_size": 16,
+    "grad_accum": 1,
+    "warmup_ratio": 0.1,
+    "weight_decay": 0.01,
+    "max_seq_length": 384,
+    "doc_stride": 128,
+    "precision": "auto",
+    "logging_steps": 50,
+    "eval_steps": 1000,
+    "seed": 42,
+    "num_workers": 0,
+    "resume": false,
+    "max_steps": -1,
+    "output_root": "C:\\Users\\yajai\\Documents\\NLP-via-APIs",
+    "allow_any_checkpoint": false
+  },
+  "train_examples": 130319,
+  "train_windows": 131823,
+  "train_runtime_s": 8049.6,
+  "train_metrics": {
+    "train_runtime": 8032.4962,
+    "train_samples_per_second": 32.822,
+    "train_steps_per_second": 2.051,
+    "total_flos": 4.192419090726086e+16,
+    "train_loss": 0.9376408502537297,
+    "epoch": 2.0
+  },
+  "final_eval": {
+    "eval_loss": 0.8667492866516113,
+    "eval_runtime": 16.8696,
+    "eval_samples_per_second": 121.046,
+    "eval_steps_per_second": 3.794,
+    "epoch": 2.0
+  },
+  "params": 124056578,
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "torch": "2.11.0+cu128",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "model_dir": "C:\\Users\\yajai\\Documents\\NLP-via-APIs\\models\\roberta-base"
+}
